@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>User Dashboard</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
+    <link rel="stylesheet" 
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+    crossorigin="anonymous" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/users/css/styles.css' %}" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>Login or Register</h1>
+        </div>
+        {% if messages %}
+        <div class="row">
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        <form action="/users/create/" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="row">
+                <div class="col-3">
+                    <label>Name:</label><br />
+                    <label>Username:</label><br />
+                    <label>Email:</label><br />
+                    <label>Password:</label><br />
+                    <label>Confirm password:</label><br />
+                </div>
+                <div class="col-9">
+                    <input type="text" name="name" placeholder="Enter name"><br />
+                    <input type="text" name="username" placeholder="Enter username"><br />
+                    <input type="text" name="email" placeholder="Enter email"><br />
+                    <input type="text" type="password" name="password"><br />
+                    <input type="text" type="confirm_password" name="confirm_password"><br />
+                    <button class="btn btn-primary btn-sm" type="submit">Create Account</button> 
+                </div>
+            </div>
+        </div>
+        </form> 
+        <div class="row">
+            <h2>Login</h2>
+        </div>
+        <form action="/users/login/" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="row">
+                <div class="col-3">
+                    <label name="email">Email:</label><br />
+                    <label name="password">Password:</label>
+                </div>
+                <div class="col-9">
+                    <input type="text" name="email" placeholder="email"><br />
+                    <input type="password" name="password" placeholder="password"><br />
+                    <button class="btn btn-primary btn-sm" type="submit">Login</button>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</body>
+</html>

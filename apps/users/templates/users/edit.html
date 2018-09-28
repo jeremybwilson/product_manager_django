@@ -1,0 +1,31 @@
+{% extends './layout.html' %}
+{% block title %}Edit User{% endblock %}
+{% block body %}
+    {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    <div class="row">
+        <h2>Edit User</h2>
+        <a href="{% url 'users:index' %}">Home</a>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <form action="{% url 'users:update' user_id=user.id %}" method="POST">
+            {% csrf_token %}
+                <label for="name">Name</label>
+                <input type="text" name="name" value="{{user.name}}">
+                <label for="email">Email</label>
+                <input type="email" name="email" value="{{user.email}}">
+                <button type="submit" class="btn btn-primary btn-sm">Edit User</button>
+            </form>
+            <form action="{% url 'users:delete' user_id=user.id %}" method="POST">
+            {% csrf_token %}
+                <button type="submit" class="btn btn-primary btn-sm">Delete User</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

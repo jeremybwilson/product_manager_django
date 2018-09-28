@@ -1,0 +1,35 @@
+{% extends './layout.html' %}
+{% block title %}Show User{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1>Show User</h1>
+    </div>
+    <div class="row">
+        <div class="col-3 strong">Name</div>
+        <div class="col-3 strong">Username</div>
+        <div class="col-3 strong">Email</div>
+        <div class="col-3 strong">Permissions</div>
+    </div>
+    <div class="row">
+        <div class="col-3">{{ name }}</div>
+        <div class="col-3">{{ username }}</div>
+        <div class="col-3">{{ email }}</div>
+        <div class="col-3">{{ permission_level }}</div>
+        <!-- <div class="col-3">{{ request.session.users }}</div> -->
+    </div>
+    <div class="row">
+        <h2>Products</h2>
+        {% for product in created_products %}
+            <div class="col-12">{{ product.product_name }}</div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        {% for product in products %}
+            <div class="col-12">{{ product.product_name }}</div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

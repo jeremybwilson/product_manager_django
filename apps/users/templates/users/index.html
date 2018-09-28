@@ -1,0 +1,40 @@
+{% extends './layout.html' %}
+{% block title %}Users Index{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <h1>Users Index</h1>
+        <div class="col-1 strong">Name</div>
+        <div class="col-2 strong">Username</div>
+        <div class="col-3 strong">Email</div>
+        <div class="col-1 strong">Permissions</div>
+        <div class="col-5 strong">Actions</div>
+    </div>
+    {% for user in users %}
+    <div class="row">
+        <div class="col-1 {% if request.session.logged_id == user.id %}strong{% else %}{% endif %}">
+            <a href="/users/{{ user.id }}/show">{{user.name}} </a>
+        </div>
+        <div class="col-2">{{user.username}}</div>
+        <div class="col-3">{{user.email}}</div>
+        <div class="col-1 ">{{user.permission_level}}</div>
+        <div class="col-5">
+            <!-- # if the current person or an ADMIN -->
+            <a href="/users/{{ user.id }}/show" class="btn btn-primary btn-sm">Show User</a>
+            <!-- Check to see if user is logged in -->
+            {% if request.session.logged_id != False %}
+            <!-- Check to see if logged_id is equal to user_id -->
+            {% if request.session.logged_id == user.id or user.permission_level == 'STUDENT' %}
+                <a href="/users/{{ user.id }}/edit" class="btn btn-primary btn-sm">Edit User</a>
+                <!-- Check to see if user permission level is equal to ADMIN -->
+                {% if request.session.logged_id == user.id or user.permission_level == 'ADMIN' %}
+                <form action="/user/{{ user.id }}/delete" class="" method="POST">
+                    <button type="submit" class="btn btn-primary btn-sm">Delete User</button>
+                </form>
+                {% endif %}
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}

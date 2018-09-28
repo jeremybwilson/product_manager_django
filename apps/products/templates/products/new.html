@@ -1,0 +1,35 @@
+% extends './layout.html' %}
+{% block title %}Product Index{% endblock %}
+
+{% block body %}
+<div class="row">
+    <h1>Create Products</h1>
+</div>
+{% if messages %}
+<div class="row">
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<form action="/product/create/" method="POST">
+{% csrf_token %}
+<div class="form-group">
+    <div class="row">
+        <div class="col-3">
+            <label name="product">Product:</label><br />
+        </div>
+        <div class="col-9">
+            <input type="text" name="product" placeholder="Product"><br />
+            <!-- <input type="text" name="username" placeholder="Enter username"><br />
+            <input type="text" name="email" placeholder="Enter email"><br />
+            <input type="text" type="password" name="password"><br />
+            <input type="text" type="confirm_password" name="confirm_password"><br /> -->
+            <button class="btn btn-primary btn-sm" type="submit">Create Product</button> 
+        </div>
+    </div>
+</div>
+</form> 
+{% endblock %}

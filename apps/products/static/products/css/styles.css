@@ -1,0 +1,39 @@
+.messages, .usertable, h1, h2, h3, h4, h5 {
+    width: 100%;
+}
+
+.usertable th {
+    text-decoration: underline;
+}
+
+form {
+    /* display: inline-block; */
+    width: 100%;
+}
+
+ul.topnav{
+    list-style-type: none;
+    padding-left: 0px;
+    width: 100%;
+}
+
+.topnav li, .showproduct {
+    display: inline-block;
+    margin-left: 0;
+}
+
+.btn.btn-primary {
+    margin-bottom: 2px;
+}
+
+.strong {
+    font-weight: bold;
+}
+
+.red, .error {
+    color:red;
+}
+
+.green, .success {
+    color: green;
+}
